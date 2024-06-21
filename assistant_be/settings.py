@@ -38,6 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'chat',
+    'calender',
+    'recommend',
 ]
 
 MIDDLEWARE = [
@@ -123,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 load_dotenv()  # 这行代码会加载.env文件中的变量
 
-BACKEND_URL = os.getenv('BACKEND_B_URL', 'http://default-backend-b-url/api')
+BACKEND_URL = os.getenv('BACKEND_URL', 'http://127.0.0.1/')
