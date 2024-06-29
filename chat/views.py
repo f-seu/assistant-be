@@ -67,22 +67,18 @@ class MessageView(APIView):
 
 class ChatView(APIView):
     def get(self, request, format=None):
-        # 获取消息列表，start和end是分页
+        # 获取一个chat的所有消息列表
         response = dict()
-        start = request.query_params.get('start', 0)
-        end = request.query_params.get('end', None)
+        chat_id = request.query_params.get('chatid')
 
-        try:
-            start = int(start)
-            end = int(end) if end is not None else None
-        except ValueError:
-            response['messages'] = "Invalid start or end parameter"
-            response['code'] = 4002
+        if not chat_id:
+            response['messages'] = "chatid parameter is required."
+            response['code'] = 4001
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-        chats = ChatModel.objects.all().order_by('created_at')[start:end]
+        chat = get_object_or_404(ChatModel, id=chat_id)
 
-        serializer = ChatSerializer(chats, many=True)
+        serializer = ChatSerializer(chat, fields=['id', 'name', 'created_at'])
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)
@@ -97,7 +93,8 @@ class ChatView(APIView):
             response['code'] = 1
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-        chat = ChatModel(name="New Chat")
+        title = chat_service_obj.get_title(first_message_content)
+        chat = ChatModel(name=title)
         chat.save()
 
         first_message = MessageModel(chat=chat, role="user", content=first_message_content)
@@ -105,17 +102,41 @@ class ChatView(APIView):
 
         def event_stream():
             full_text = ""
+            first_response_obj = {"chatid": chat.id, "title": title}
+            yield f'data: {json.dumps(first_response_obj)}\n\n'
             for message in chat_service_obj.chat([], first_message_content):
                 full_text += message['text']
                 yield f"data: {json.dumps(message)}\n\n"
             MessageModel(chat=chat, role="assistant", content=full_text).save()
-
 
             # 创建StreamingHttpResponse对象，使用event_stream作为数据源
 
         response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
         response['Cache-Control'] = 'no-cache'
         return response
+
+
+class ChatListView(APIView):
+    def get(self, request):
+        response = dict()
+        start = request.query_params.get('start', 0)
+        end = request.query_params.get('end', None)
+
+        try:
+            start = int(start)
+            end = int(end) if end is not None else None
+        except ValueError:
+            response['messages'] = "Invalid start or end parameter"
+            response['code'] = 4002
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+        chats = ChatModel.objects.all().order_by('created_at')[start:end]
+
+        serializer = ChatSerializer(chats, many=True,fields=['id', 'name', 'created_at'])
+        response['data'] = serializer.data
+        response['code'] = 0
+        return Response(response)
+
 
 class ChatNumView(APIView):
     def get(self, request, format=None):
