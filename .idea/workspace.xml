@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(chat):实现聊天基本功能">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/chat_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/chat_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +151,7 @@
       <workItem from="1719139518638" duration="157000" />
       <workItem from="1719244692789" duration="4201000" />
       <workItem from="1719284884019" duration="5791000" />
-      <workItem from="1719589573371" duration="4252000" />
+      <workItem from="1719589573371" duration="10029000" />
     </task>
     <task id="LOCAL-00001" summary="feat(chat):实现聊天基本功能">
       <option name="closed" value="true" />

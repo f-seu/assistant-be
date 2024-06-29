@@ -10,15 +10,24 @@ import json
 
 chat_service_obj = ChatService()
 
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+
+    def enforce_csrf(self, request):
+        return
 
 class MessageView(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+
     def get(self, request, format=None):
         # 获取一个chat的所有消息列表
         response = dict()
         chat_id = request.query_params.get('chatid')
 
         if not chat_id:
-            response['messages'] = "chatid parameter is required."
+            response['msg'] = "chatid parameter is required."
             response['code'] = 4001
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
@@ -37,7 +46,7 @@ class MessageView(APIView):
         message_content = request.data.get('message')
 
         if not chat_id or not message_content:
-            response['messages'] = "chatid and message parameters are required."
+            response['msg'] = "chatid and message parameters are required."
             response['code'] = 4001
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
@@ -66,13 +75,15 @@ class MessageView(APIView):
 
 
 class ChatView(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+
     def get(self, request, format=None):
         # 获取一个chat的所有消息列表
         response = dict()
         chat_id = request.query_params.get('chatid')
 
         if not chat_id:
-            response['messages'] = "chatid parameter is required."
+            response['msg'] = "chatid parameter is required."
             response['code'] = 4001
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
@@ -89,7 +100,7 @@ class ChatView(APIView):
         first_message_content = request.data.get('message')
 
         if not first_message_content:
-            response['messages'] = "message parameter is required."
+            response['msg'] = "message parameter is required."
             response['code'] = 1
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
@@ -97,23 +108,11 @@ class ChatView(APIView):
         chat = ChatModel(name=title)
         chat.save()
 
-        first_message = MessageModel(chat=chat, role="user", content=first_message_content)
-        first_message.save()
 
-        def event_stream():
-            full_text = ""
-            first_response_obj = {"chatid": chat.id, "title": title}
-            yield f'data: {json.dumps(first_response_obj)}\n\n'
-            for message in chat_service_obj.chat([], first_message_content):
-                full_text += message['text']
-                yield f"data: {json.dumps(message)}\n\n"
-            MessageModel(chat=chat, role="assistant", content=full_text).save()
-
-            # 创建StreamingHttpResponse对象，使用event_stream作为数据源
-
-        response = StreamingHttpResponse(event_stream(), content_type="text/event-stream")
-        response['Cache-Control'] = 'no-cache'
-        return response
+        serializer = ChatSerializer(chat, fields=['id', 'name', 'created_at'])
+        response['data'] = serializer.data
+        response['code'] = 0
+        return Response(response)
 
 
 class ChatListView(APIView):
@@ -126,7 +125,7 @@ class ChatListView(APIView):
             start = int(start)
             end = int(end) if end is not None else None
         except ValueError:
-            response['messages'] = "Invalid start or end parameter"
+            response['msg'] = "Invalid start or end parameter"
             response['code'] = 4002
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
