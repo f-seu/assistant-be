@@ -62,8 +62,14 @@ class MessageView(APIView):
         def event_stream():
             full_text = ""
             for message in chat_service_obj.chat_stream(history, message_content):
-                full_text += message['text']
-                yield f"data: {json.dumps(message)}\n\n"
+
+                full_text += message
+                message_obj = {"text": message}
+                # 转换 message_obj 为 JSON 字符串
+                json_message = json.dumps(message_obj)
+                # 正确格式化 SSE 消息
+                resp = f"data: {json_message}\n\n"
+                yield resp
             MessageModel(chat=chat, role="assistant", content=full_text).save()
 
             # 创建StreamingHttpResponse对象，使用event_stream作为数据源
