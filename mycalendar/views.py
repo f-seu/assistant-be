@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from .models import CalendarModel, PlanModel
 from .service import CalendarService
 from .serializers import CalenderSerializer, PlanSerializer, PlanParamsSerializer
-
+import re
 from django.core.cache import cache
 import threading
 import logging
@@ -109,6 +109,9 @@ class PlanView(APIView):
         cache.set(f"{year}-{month}-{day}","true", timeout=300)
         try:
             plan_str = self.calender_service.get_plan(year=year, month=month, day=day, content=content)
+            pattern = r'"action": "Final Answer",\s*"action_input":\s*"([^"]+)"'
+            matches = re.findall(pattern, plan_str)
+            plan_str = matches[0]
             plan = PlanModel.objects.get(year=year, month=month, day=day)
             plan.content = plan_str
             plan.save()
