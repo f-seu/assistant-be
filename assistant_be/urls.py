@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from chat.views import ChatView,MessageView,ChatNumView,ChatListView
+from mycalendar.views import CalendarView,PlanView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/chat/', ChatView.as_view()),
     path('api/chat-list/', ChatListView.as_view()),
     path('api/chat-message/', MessageView.as_view()),
     path('api/chat-num/', ChatNumView.as_view()),
+
+    path('api/calendar/', CalendarView.as_view()),
+    path('api/plan/', PlanView.as_view()),
     path('api-auth/', include('rest_framework.urls'))
 ]

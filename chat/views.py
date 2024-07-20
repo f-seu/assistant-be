@@ -5,18 +5,18 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import ChatModel, MessageModel
 from .serializers import ChatSerializer, MessageSerializer
-from .chat_service import ChatService
+from utils.chat import ChatService
 import json
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 chat_service_obj = ChatService()
-
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 
 class CsrfExemptSessionAuthentication(SessionAuthentication):
 
     def enforce_csrf(self, request):
         return
+
 
 class MessageView(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
@@ -58,11 +58,10 @@ class MessageView(APIView):
         history = list()
         for h in history_model:
             history.append({"role": h.role, "content": h.content})
-        print(history)
 
         def event_stream():
             full_text = ""
-            for message in chat_service_obj.chat(history, message_content):
+            for message in chat_service_obj.chat_stream(history, message_content):
                 full_text += message['text']
                 yield f"data: {json.dumps(message)}\n\n"
             MessageModel(chat=chat, role="assistant", content=full_text).save()
@@ -94,7 +93,7 @@ class ChatView(APIView):
         response['code'] = 0
         return Response(response)
 
-    def post(self, request, format=None):
+    def post(self, request):
         # 新建一个聊天
         response = dict()
         first_message_content = request.data.get('message')
@@ -104,10 +103,10 @@ class ChatView(APIView):
             response['code'] = 1
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
 
-        title = chat_service_obj.get_title(first_message_content)
+        prompt = f"下面是用户输入的一个问题，请不要回答这个问题，而是为这个问题取一个简短的10个字左右的标题:{first_message_content}"
+        title = chat_service_obj.chat([], prompt)
         chat = ChatModel(name=title)
         chat.save()
-
 
         serializer = ChatSerializer(chat, fields=['id', 'name', 'created_at'])
         response['data'] = serializer.data
@@ -127,11 +126,11 @@ class ChatListView(APIView):
         except ValueError:
             response['msg'] = "Invalid start or end parameter"
             response['code'] = 4002
-            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+            return Response(response)
 
         chats = ChatModel.objects.all().order_by('created_at')[start:end]
 
-        serializer = ChatSerializer(chats, many=True,fields=['id', 'name', 'created_at'])
+        serializer = ChatSerializer(chats, many=True, fields=['id', 'name', 'created_at'])
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)
