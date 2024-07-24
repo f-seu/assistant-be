@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'chat',
     'mycalendar',
     'recommend',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'assistant_be.wsgi.application'
+ASGI_APPLICATION = 'assistant_be.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
