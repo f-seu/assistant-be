@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from chat.views import ChatView,MessageView,ChatNumView,ChatListView
 from mycalendar.views import CalendarView,PlanView
+from recommend.views import RecommendView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/chat/', ChatView.as_view()),
@@ -27,5 +28,6 @@ urlpatterns = [
 
     path('api/calendar/', CalendarView.as_view()),
     path('api/plan/', PlanView.as_view()),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api/recommend',RecommendView.as_view()),
+    path('api-auth/', include('rest_framework.urls')),
 ]

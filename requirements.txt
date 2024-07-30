@@ -15,4 +15,4 @@ urllib3==2.2.2
 nltk~=3.8.1
 openai~=1.36.0
 hanlp_restful~=0.0.23
-channels~=4.1.0
+channels~=3.0.5
