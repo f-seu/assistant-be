@@ -27,7 +27,6 @@ class ChatService:
             timeout=MODEL_OUT_TIMEOUT,
         )
         for chunk in stream:
-            print(chunk.choices[0].delta.content)
             yield chunk.choices[0].delta.content or ""
 
     def chat(self, history: list[dict], message: str):

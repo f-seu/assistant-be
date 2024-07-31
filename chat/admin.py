@@ -4,7 +4,7 @@ from .models import ChatModel,MessageModel
 
 @admin.register(ChatModel)
 class ChatAdmin(admin.ModelAdmin):
-    list_display = ('name', 'created_at')
+    list_display = ('id','name', 'created_at')
     search_fields = ('name',)
 
 @admin.register(MessageModel)
