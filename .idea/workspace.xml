@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(chat):改为使用chatchat3">
-      <change afterPath="$PROJECT_DIR$/chat/messsage_consumer.py" afterDir="false" />
+    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(chat):改为使用ws">
+      <change afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/routing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/chat.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +61,7 @@
     "Python.chat.executor": "Run",
     "Python.chat_service.executor": "Run",
     "Python.request.executor": "Run",
+    "Python.test.executor": "Run",
     "Python.views.executor": "Run",
     "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -83,8 +86,8 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Django.Structure" show_stripe_button="false" side_tool="true" />
       <window_info id="Learn" show_stripe_button="false" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.13256541" />
-      <window_info active="true" id="Commit" order="1" visible="true" weight="0.13256541" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13256541" />
+      <window_info id="Commit" order="1" weight="0.13256541" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
@@ -94,12 +97,12 @@
       <window_info anchor="bottom" id="Version Control" order="0" />
       <window_info anchor="bottom" id="Problems" order="1" />
       <window_info anchor="bottom" id="Problems View" order="2" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.4705671" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="3" visible="true" weight="0.29038048" />
       <window_info anchor="bottom" id="Services" order="4" />
       <window_info anchor="bottom" id="Python Packages" order="5" weight="0.1" />
-      <window_info anchor="bottom" id="Debug" order="6" weight="0.4705671" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.29038048" />
       <window_info anchor="bottom" id="Python Console" order="6" weight="0.1" />
-      <window_info active="true" anchor="bottom" id="Run" order="6" visible="true" weight="0.4705671" />
+      <window_info anchor="bottom" id="Run" order="6" weight="0.29038048" />
       <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
       <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
       <window_info anchor="right" id="SciView" show_stripe_button="false" />
@@ -163,6 +166,29 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="assistant_be" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="assistant_be" type="Python.DjangoServer" factoryName="Django server">
       <module name="assistant_be" />
       <option name="ENV_FILES" value="" />
@@ -193,11 +219,13 @@
     </configuration>
     <list>
       <item itemvalue="Django 服务器.assistant_be" />
+      <item itemvalue="Python.test" />
       <item itemvalue="Python.chat" />
       <item itemvalue="Python.chat_service" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.chat" />
         <item itemvalue="Python.chat_service" />
       </list>
@@ -259,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721480768528</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat(chat):改为使用ws">
+      <option name="closed" value="true" />
+      <created>1722454520028</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1722454520028</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,35 +304,21 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(chat):实现聊天基本功能" />
     <MESSAGE value="feat(chat):改为使用chatchat3" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(chat):改为使用chatchat3" />
+    <MESSAGE value="feat(chat):改为使用ws" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(chat):改为使用ws" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/recommend/views.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/recommend/service.py</url>
-          <line>45</line>
+          <line>56</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/recommend/service.py</url>
-          <line>63</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/recommend/service.py</url>
-          <line>64</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/recommend/service.py</url>
-          <line>67</line>
-          <option name="timeStamp" value="5" />
+          <url>file://$PROJECT_DIR$/recommend/consumers.py</url>
+          <line>141</line>
+          <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -306,5 +328,6 @@
     <SUITE FILE_PATH="coverage/assistant_be$chat.coverage" NAME="chat 覆盖结果" MODIFIED="1721843495161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
     <SUITE FILE_PATH="coverage/assistant_be$request.coverage" NAME="chat_service 覆盖结果" MODIFIED="1718895910052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat" />
     <SUITE FILE_PATH="coverage/assistant_be$settings.coverage" NAME="settings Coverage Results" MODIFIED="1722367293326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/assistant_be" />
+    <SUITE FILE_PATH="coverage/assistant_be$test.coverage" NAME="test Coverage Results" MODIFIED="1722514582117" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

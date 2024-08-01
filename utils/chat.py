@@ -42,7 +42,7 @@ class ChatService:
             timeout=MODEL_OUT_TIMEOUT,
         )
         response = chat_completion.choices[0].message.content
-        self.logger.info(f"模型回答为:{response}")
+        self.logger.info(f"模型已回答")
         return response
 
     def chat_with_search_engine(self, history: list[dict], message: str):
@@ -50,7 +50,7 @@ class ChatService:
             "role": "user",
             "content": message,
         })
-        self.logger.info(f"收到一个浏览器对话的请求，prompt:{message}")
+        self.logger.info(f"收到一个网络对话的请求，prompt:{message}")
         chat_completion = self.client.chat.completions.create(
             messages=history,
             model=MODEL_NAME,
@@ -59,7 +59,7 @@ class ChatService:
             timeout=MODEL_OUT_TIMEOUT,
         )
         response = chat_completion.choices[0].message.content
-        self.logger.info(f"模型回答为:{response}")
+        self.logger.info(f"模型已回答")
         return response
 
     def chat_with_search_engine_and_knowledgebase(self, history: list[dict], message: str):
@@ -67,7 +67,7 @@ class ChatService:
             "role": "user",
             "content": message,
         })
-        self.logger.info(f"收到一个浏览器对话的请求，prompt:{message}")
+        self.logger.info(f"收到一个网络知识库对话的请求，prompt:{message}")
         chat_completion = self.client.chat.completions.create(
             messages=history,
             model=MODEL_NAME,
@@ -76,7 +76,7 @@ class ChatService:
             timeout=MODEL_OUT_TIMEOUT,
         )
         response = chat_completion.choices[0].message.content
-        self.logger.info(f"模型回答为:{response}")
+        self.logger.info(f"模型已回答")
         return response
 
 

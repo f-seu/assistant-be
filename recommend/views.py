@@ -9,7 +9,8 @@ from .models import RecommendModel
 from .serializers import RecommendModelSerializer
 from .service import RecommendService
 import logging
-
+from django.utils.timezone import now
+import datetime
 class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         return
@@ -34,12 +35,15 @@ class RecommendView(APIView):
             return Response(response)
 
         # 启动线程进行推荐计算
-        thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
-        thread.start()
 
         latest_recommendation = RecommendModel.objects.filter(recommend_type=recommend_type).order_by('-create_at').first()
-        print(latest_recommendation)
         if latest_recommendation:
+            current_time = now()
+
+            time_diff = (current_time - latest_recommendation.create_at).total_seconds()
+            if time_diff > 60:
+                thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
+                thread.start()
             response['data'] = RecommendModelSerializer(latest_recommendation).data
         else:
             response['code'] = 4004
@@ -62,7 +66,6 @@ class RecommendView(APIView):
                 else:
                     cache.delete(recommend_type)
                     return
-                print(result)
                 recommend_obj = RecommendModel.objects.create(recommend_type=recommend_type, content=result)
                 recommend_obj.save()
                 break

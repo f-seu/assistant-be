@@ -1,3 +1,5 @@
+import datetime
+
 from hanlp_restful import HanLPClient
 from utils.chat import ChatService
 import logging
@@ -19,13 +21,25 @@ class RecommendService(object):
         result = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
         self.logger.info(f"结果：{result}")
 
-        # 修正正则表达式以匹配正确的内容
         result = result.split("```")[-1]
         try:
-            json.loads(result)
+            results = json.loads(result)
+            idx = 0
+            for result in results:
+                title = result['title']
+                title,poster,url = self.get_music_poster_and_title(title)
+                # result['title'] = title
+                result['poster'] = poster
+                result['url'] = url
+                result['id'] = idx
+                result['update_time'] = datetime.datetime.now().strftime("%H:%M:%S")
+                idx += 1
+            modified_results = json.dumps(results, ensure_ascii=False, indent=2)
+            return modified_results
         except Exception as err:
+            import traceback
+            traceback.print_exc()
             raise AssertionError("模型输出解析失败")
-        return result
 
     def get_movie(self, num):
         prompt = (f'请根据知识库，推荐{num}个我可能喜欢的电影，给出我一个json格式的list，每个元素里面包含一个title和一个reason，title是电影的名字，reason'
@@ -38,15 +52,11 @@ class RecommendService(object):
         # 修正正则表达式以匹配正确的内容
         result = result.split("```")[-1]
         try:
-            print(result)
             results = json.loads(result)
-            print(results)
-            print(len(results))
             idx = 0
             for result in results:
-                print(result)
                 title = result['title']
-                title,poster,url = self.get_poster_and_title(title)
+                title,poster,url = self.get_movie_poster_and_title(title)
                 # result['title'] = title
                 result['poster'] = poster
                 result['url'] = url
@@ -59,11 +69,10 @@ class RecommendService(object):
             traceback.print_exc()
             raise AssertionError("模型输出解析失败")
 
-    def get_poster_and_title(self,name):
+    def get_movie_poster_and_title(self,name):
         url = f'https://api.themoviedb.org/3/search/movie?query={name}&api_key={TMDB_KEY}'
         res = requests.get(url,timeout=10,proxies=[])
         res = res.json()
-        print(res)
         res = res['results'][0]
         name = res['title']
         poster = res['poster_path']
@@ -71,3 +80,13 @@ class RecommendService(object):
         movie_id = res['id']
         url = f'https://www.themoviedb.org/movie/{movie_id}'
         return name,poster,url
+
+    def get_music_poster_and_title(self,name):
+        url = f"https://dataiqs.com/api/kgmusic/?msg={name}&type=mv&n=0"
+        res = requests.get(url,timeout=10,proxies=[])
+        res = res.json()
+        res = res['data']
+        name = res['name']
+        poster = res['cover_url']
+        url = res['mv_url']
+        return name, poster, url
