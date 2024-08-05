@@ -18,11 +18,15 @@ class RecommendService(object):
                   f'是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容。例如你应该输出:[{{"title":"标题","reason":"原因"}}]')
 
         self.logger.info(f"正在尝试推荐音乐，prompt为：{prompt}")
-        result = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
-        self.logger.info(f"结果：{result}")
+        results = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
 
-        result = result.split("```")[-1]
+        result = results.split("```")[-1]
+        if len(result) < 10:
+            result = results[-2]
         try:
+            result = result.replace("json","")
+            result = result.lstrip("\n")
+
             results = json.loads(result)
             idx = 0
             for result in results:
@@ -46,12 +50,15 @@ class RecommendService(object):
                   f'是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容。例如你应该输出:[{{"title":"标题","reason":"原因"}}]')
 
         self.logger.info(f"正在尝试推荐音乐，prompt为：{prompt}")
-        result = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
-        self.logger.info(f"结果：{result}")
+        results = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
 
         # 修正正则表达式以匹配正确的内容
-        result = result.split("```")[-1]
+        result = results.split("```")[-1]
+        if len(result) < 10:
+            result = results[-2]
         try:
+            result = result.replace("json","")
+            result = result.lstrip("\n")
             results = json.loads(result)
             idx = 0
             for result in results:
