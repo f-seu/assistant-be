@@ -7,6 +7,10 @@ class CalenderSerializer(serializers.ModelSerializer):
         model = CalendarModel
         fields = ['id', 'content']
 
+class CalenderListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CalendarModel
+        fields = ['id', 'day']
 
 class PlanSerializer(serializers.ModelSerializer):
     class Meta:

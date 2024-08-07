@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(recommend):实现应用推荐功能">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/consumers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/service.py" afterDir="false" />
-    </list>
+    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(recommend):应用推荐新增三个应用" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,8 +77,8 @@
       <window_info id="Pull Requests" show_stripe_button="false" />
       <window_info id="Django.Structure" show_stripe_button="false" side_tool="true" />
       <window_info id="Learn" show_stripe_button="false" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22652116" />
-      <window_info id="Commit" order="1" weight="0.22652116" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.22652116" />
+      <window_info active="true" id="Commit" order="1" visible="true" weight="0.22652116" />
       <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
@@ -265,7 +261,7 @@
       <workItem from="1721841107022" duration="615000" />
       <workItem from="1721842920782" duration="135000" />
       <workItem from="1721843218055" duration="28623000" />
-      <workItem from="1722871448715" duration="3907000" />
+      <workItem from="1722871448715" duration="4354000" />
     </task>
     <task id="LOCAL-00001" summary="feat(chat):实现聊天基本功能">
       <option name="closed" value="true" />
@@ -299,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722527880580</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat(recommend):应用推荐新增三个应用">
+      <option name="closed" value="true" />
+      <created>1722875571266</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1722875571266</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,14 +314,15 @@
     <MESSAGE value="feat(chat):改为使用chatchat3" />
     <MESSAGE value="feat(chat):改为使用ws" />
     <MESSAGE value="feat(recommend):实现应用推荐功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(recommend):实现应用推荐功能" />
+    <MESSAGE value="feat(recommend):应用推荐新增三个应用" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(recommend):应用推荐新增三个应用" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/recommend/service.py</url>
-          <line>60</line>
+          <line>63</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

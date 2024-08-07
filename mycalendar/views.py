@@ -7,7 +7,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from .models import CalendarModel, PlanModel
 from .service import CalendarService
-from .serializers import CalenderSerializer, PlanSerializer, PlanParamsSerializer
+from .serializers import CalenderSerializer, PlanSerializer, PlanParamsSerializer,CalenderListSerializer
 import re
 from django.core.cache import cache
 import threading
@@ -61,6 +61,27 @@ class CalendarView(APIView):
         response['code'] = 0
         return Response(response)
 
+class HasCalendarView(APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
+
+    def get(self, request):
+        response = dict()
+        response['code'] = 0
+        year = request.query_params.get('year')
+        month = request.query_params.get('month')
+        if not year or not month:
+            response['msg'] = "参数错误"
+            response['code'] = 4001
+            return Response(response, status=status.HTTP_200_OK)
+        calender = CalendarModel.objects.filter(year=year, month=month).exclude(content="").all()
+
+        serializer = CalenderListSerializer(calender,many=True)
+
+        response['data'] = serializer.data
+        response['code'] = 0
+        return Response(response)
+
+ 
 
 class PlanView(APIView):
     logger = logging.getLogger('myapp')

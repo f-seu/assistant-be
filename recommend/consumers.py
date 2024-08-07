@@ -101,8 +101,10 @@ class Consumer(WebsocketConsumer):
         self.send(text_data=text_data)
 
     def get_recommend_message(self):
+        local_time = timezone.localtime(timezone.now())
+        formatted_date = local_time.strftime("%Y年%m月%d日%H时%M分%S秒")
         prompt = (
-            f'请根据以下信息，结合app打开的时间，以及打开app的顺序，推荐2个我现在最可能打开的应用，给出我一个json格式的list，每个元素里面包含一个name和一个reason，name是app的名字，'
+            f'现在时间是{formatted_date}，请根据以下信息，结合app打开的时间，以及打开app的顺序，推荐2个我现在最可能打开的应用，给出我一个json格式的list，每个元素里面包含一个name和一个reason，name是app的名字，'
             f'reason是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容，在可能的情况下请尽量强调与刚刚打开的APP的联系。例如你应该输出类似于如下内容:[{{"name":"应用名称","reason":"打开原因"}}')
 
 
