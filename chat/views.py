@@ -110,7 +110,7 @@ class ChatListView(APIView):
             response['code'] = 4002
             return Response(response)
 
-        chats = ChatModel.objects.all().order_by('created_at')[start:end]
+        chats = ChatModel.objects.all().order_by('-created_at')[start:end]
 
         serializer = ChatSerializer(chats, many=True, fields=['id', 'name', 'created_at'])
         response['data'] = serializer.data
