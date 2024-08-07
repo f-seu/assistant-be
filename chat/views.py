@@ -81,7 +81,20 @@ class ChatView(APIView):
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)
+    def delete(self, request, format=None):
+        # 删除一个聊天
+        response = dict()
+        chat_id = request.query_params.get('chatid')
 
+        if not chat_id:
+            response['msg'] = "chatid parameter is required."
+            response['code'] = 4002
+            return Response(response, status=status.HTTP_400_BAD_REQUEST)
+
+        chat = get_object_or_404(ChatModel, id=chat_id)
+        chat.delete()
+        response['code'] = 0
+        return Response(response, status=status.HTTP_200_OK)
 
 class ChatListView(APIView):
     def get(self, request):
