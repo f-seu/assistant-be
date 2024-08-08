@@ -7,7 +7,7 @@ from assistant_be.settings import HEFENG_KEY, HEFENG_HOST
 
 # 获取一个名为 'myapp' 的日志记录器
 
-class CalendarService(object):
+class CalenderService(object):
     def __init__(self):
         self.chat = ChatService()
         self.logger = logging.getLogger('myapp')
@@ -133,7 +133,7 @@ class CalendarService(object):
 #
 #     return "获取天气失败，请忽略"
 #
-# class CalendarService:
+# class CalenderService:
 #     def __init__(self):
 #         self.chat_url = f"{BACKEND_URL}chat/knowledge_base_chat"  # 确保URL是正确的
 #         self.model_name = MODEL_NAME

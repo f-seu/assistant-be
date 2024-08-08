@@ -5,8 +5,8 @@ from rest_framework.authentication import SessionAuthentication, BasicAuthentica
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from .models import CalendarModel, PlanModel
-from .service import CalendarService
+from .models import CalenderModel, PlanModel
+from .service import CalenderService
 from .serializers import CalenderSerializer, PlanSerializer, PlanParamsSerializer,CalenderListSerializer
 import re
 from django.core.cache import cache
@@ -19,7 +19,7 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
         return
 
 
-class CalendarView(APIView):
+class CalenderView(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
     def get(self, request):
@@ -32,9 +32,9 @@ class CalendarView(APIView):
             response['msg'] = "参数错误"
             response['code'] = 4001
             return Response(response, status=status.HTTP_200_OK)
-        calender = CalendarModel.objects.filter(year=year, month=month, day=day).first()
+        calender = CalenderModel.objects.filter(year=year, month=month, day=day).first()
         if not calender:
-            calender = CalendarModel.objects.create(year=year, month=month, day=day)
+            calender = CalenderModel.objects.create(year=year, month=month, day=day)
             calender.save()
         serializer = CalenderSerializer(calender)
         response['data'] = serializer.data
@@ -52,16 +52,16 @@ class CalendarView(APIView):
             response['msg'] = "参数错误"
             response['code'] = 4001
             return Response(response, status=status.HTTP_200_OK)
-        calender = CalendarModel.objects.filter(year=year, month=month, day=day).first()
+        calender = CalenderModel.objects.filter(year=year, month=month, day=day).first()
         if not calender:
-            calender = CalendarModel.objects.create(year=year, month=month, day=day)
+            calender = CalenderModel.objects.create(year=year, month=month, day=day)
             calender.save()
         calender.content = content
         calender.save()
         response['code'] = 0
         return Response(response)
 
-class HasCalendarView(APIView):
+class HasCalenderView(APIView):
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
 
     def get(self, request):
@@ -73,7 +73,7 @@ class HasCalendarView(APIView):
             response['msg'] = "参数错误"
             response['code'] = 4001
             return Response(response, status=status.HTTP_200_OK)
-        calender = CalendarModel.objects.filter(year=year, month=month).exclude(content="").all()
+        calender = CalenderModel.objects.filter(year=year, month=month).exclude(content="").all()
 
         serializer = CalenderListSerializer(calender,many=True)
 
@@ -86,7 +86,7 @@ class HasCalendarView(APIView):
 class PlanView(APIView):
     logger = logging.getLogger('myapp')
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
-    calender_service = CalendarService()
+    calender_service = CalenderService()
 
     def get(self, request):
         # 获取一个chat的所有消息列表
@@ -109,7 +109,7 @@ class PlanView(APIView):
 
         plan, _ = PlanModel.objects.get_or_create(year=year, month=month, day=day)
         if force_update or plan.content == "":
-            calender = CalendarModel.objects.filter(year=year,month=month,day=day).first()
+            calender = CalenderModel.objects.filter(year=year,month=month,day=day).first()
             if calender is None or len(calender.content) < 10:
                 self.logger.warning(f"规划{year}-{month}-{day}日程失败，calender对象：{calender}")
                 response['msg'] = "当前选择日期不存在日程或日程过短，无法进行规划"

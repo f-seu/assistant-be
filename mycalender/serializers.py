@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from .models import CalendarModel,PlanModel
+from .models import CalenderModel,PlanModel
 
 
 class CalenderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CalendarModel
+        model = CalenderModel
         fields = ['id', 'content']
 
 class CalenderListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CalendarModel
+        model = CalenderModel
         fields = ['id', 'day']
 
 class PlanSerializer(serializers.ModelSerializer):
