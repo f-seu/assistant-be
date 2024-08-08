@@ -2,9 +2,9 @@ from django.db import models
 
 
 # Create your models here.
-class CalenderModel(models.Model):
+class CalendarModel(models.Model):
     class Meta:
-        db_table = "calender"
+        db_table = "calendar"
         verbose_name = "日程"
         verbose_name_plural = verbose_name
 

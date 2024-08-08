@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import CalenderModel,PlanModel
+from .models import CalendarModel,PlanModel
 
-@admin.register(CalenderModel)
-class CalenderModelAdmin(admin.ModelAdmin):
+@admin.register(CalendarModel)
+class CalendarModelAdmin(admin.ModelAdmin):
     list_display = ('year', 'month', 'day', 'content')
     list_filter = ('year', 'month', 'day')
     search_fields = ('content',)

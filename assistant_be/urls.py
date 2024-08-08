@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from chat.views import ChatView,MessageView,ChatNumView,ChatListView
-from mycalender.views import CalenderView,PlanView,HasCalenderView
+from mycalendar.views import CalendarView,PlanView,HasCalendarView
 from recommend.views import RecommendView
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,8 +26,8 @@ urlpatterns = [
     path('api/chat-message/', MessageView.as_view()),
     path('api/chat-num/', ChatNumView.as_view()),
 
-    path('api/calender/', CalenderView.as_view()),
-    path('api/has-calender/', HasCalenderView.as_view()),
+    path('api/calendar/', CalendarView.as_view()),
+    path('api/has-calendar/', HasCalendarView.as_view()),
 
     path('api/plan/', PlanView.as_view()),
     path('api/recommend',RecommendView.as_view()),

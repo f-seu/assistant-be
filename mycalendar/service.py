@@ -7,7 +7,7 @@ from assistant_be.settings import HEFENG_KEY, HEFENG_HOST
 
 # 获取一个名为 'myapp' 的日志记录器
 
-class CalenderService(object):
+class CalendarService(object):
     def __init__(self):
         self.chat = ChatService()
         self.logger = logging.getLogger('myapp')
@@ -16,7 +16,7 @@ class CalenderService(object):
     def get_plan(self, year, month, day, content):
 
         weather_prompt = ""
-        positions = self.get_calender_positions(content)
+        positions = self.get_calendar_positions(content)
         if len(positions) != 0:
             weather_prompt += "注意以下是部分地点的天气："
 
@@ -85,7 +85,7 @@ class CalenderService(object):
 
         return "获取天气失败，请忽略"
 
-    def get_calender_positions(self, content):
+    def get_calendar_positions(self, content):
         result = self.hanlp.parse(content, tasks='ner/msra')
         result = result['ner/msra']
         positions = list()
@@ -133,18 +133,18 @@ class CalenderService(object):
 #
 #     return "获取天气失败，请忽略"
 #
-# class CalenderService:
+# class CalendarService:
 #     def __init__(self):
 #         self.chat_url = f"{BACKEND_URL}chat/knowledge_base_chat"  # 确保URL是正确的
 #         self.model_name = MODEL_NAME
 #         self.temperature = 0.7
-#         self.chat = CalenderChatService()
+#         self.chat = CalendarChatService()
 #
-#     def get_calender(self, year, month, day):
+#     def get_calendar(self, year, month, day):
 #
 #         prompt = f"请你根据我{year}年{month}月{day}日的安排，为我推荐一个行程"
 #
-#         positions = self.chat.get_calender_positions(year, month, day)
+#         positions = self.chat.get_calendar_positions(year, month, day)
 #         if len(positions) != 0:
 #             prompt += ",注意以下是部分地点的天气："
 #
@@ -188,14 +188,14 @@ class CalenderService(object):
 #         return ""
 #
 #
-# class CalenderChatService:
+# class CalendarChatService:
 #     def __init__(self):
 #         self.chat_url = f"{BACKEND_URL}chat/knowledge_base_chat"  # 确保URL是正确的
 #         self.model_name = MODEL_NAME
 #         self.temperature = 0.7
 #         self.hanlp = HanLPClient('https://www.hanlp.com/api', auth=None, language='zh')  # auth不填则匿名，zh中文，mul多语种
 #
-#     # def get_calender_str(self, year, month, day):
+#     # def get_calendar_str(self, year, month, day):
 #     #     data = {
 #     #         "query": f"请你根据知识库，列一下{year}年{month}月{day}日我有哪些日程",
 #     #         "conversation_id": "",
@@ -216,7 +216,7 @@ class CalenderService(object):
 #     #         return json.loads(event_data)['text']  # 安全地解析JSON数据
 #     #     return None
 #
-#     def get_calender_positions(self, year, month, day):
+#     def get_calendar_positions(self, year, month, day):
 #         data = {
 #             "query": f"请你根据知识库，说明{year}年{month}月{day}日我要去哪些地点",
 #             "knowledge_base_name": "samples",
