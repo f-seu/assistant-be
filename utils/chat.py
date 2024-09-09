@@ -1,9 +1,4 @@
-"""
- * Copyright (c) 2024, Li Yaning,Zu Yuankun/Southeast University
- * Licensed under the GPL3 License (see LICENSE file for details)
-"""
-
-from assistant_be.settings import BACKEND_URL, MODEL_NAME
+from assistant_be.settings import BACKEND_URL, MODEL_NAME,MODEL_OUT_TIMEOUT
 import logging
 from openai import OpenAI
 
@@ -29,6 +24,7 @@ class ChatService:
             messages=history,
             model=MODEL_NAME,
             stream=True,
+            timeout=MODEL_OUT_TIMEOUT,
         )
         for chunk in stream:
             yield chunk.choices[0].delta.content or ""
@@ -43,9 +39,10 @@ class ChatService:
             messages=history,
             model=MODEL_NAME,
             stream=False,
+            timeout=MODEL_OUT_TIMEOUT,
         )
         response = chat_completion.choices[0].message.content
-        self.logger.info(f"模型回答为:{response}")
+        self.logger.info(f"模型已回答")
         return response
 
     def chat_with_search_engine(self, history: list[dict], message: str):
@@ -53,16 +50,50 @@ class ChatService:
             "role": "user",
             "content": message,
         })
-        self.logger.info(f"收到一个浏览器对话的请求，prompt:{message}")
+        self.logger.info(f"收到一个网络对话的请求，prompt:{message}")
         chat_completion = self.client.chat.completions.create(
             messages=history,
             model=MODEL_NAME,
             stream=False,
             tools=['search_internet'],
+            timeout=MODEL_OUT_TIMEOUT,
         )
         response = chat_completion.choices[0].message.content
-        self.logger.info(f"模型回答为:{response}")
+        self.logger.info(f"模型已回答")
         return response
+
+    def chat_with_search_engine_and_knowledgebase(self, history: list[dict], message: str):
+        history.append({
+            "role": "user",
+            "content": message,
+        })
+        self.logger.info(f"收到一个网络知识库对话的请求，prompt:{message}")
+        chat_completion = self.client.chat.completions.create(
+            messages=history,
+            model=MODEL_NAME,
+            stream=False,
+            tools=['search_internet','search_local_knowledgebase'],
+            timeout=MODEL_OUT_TIMEOUT,
+        )
+        response = chat_completion.choices[0].message.content
+        self.logger.info(f"模型已回答")
+        return response
+    
+    def chat_stream_with_search_engine_and_knowledgebase(self, history: list[dict], message: str):
+        history.append({
+            "role": "user",
+            "content": message,
+        })
+        self.logger.info(f"收到一个网络知识库流式对话的请求，prompt:{message}")
+        stream = self.client.chat.completions.create(
+            messages=history,
+            model=MODEL_NAME,
+            stream=True,
+            timeout=MODEL_OUT_TIMEOUT,
+            tools=['search_internet','search_local_knowledgebase'],
+        )
+        for chunk in stream:
+            yield chunk.choices[0].delta.content or ""
 
 
 if __name__ == "__main__":

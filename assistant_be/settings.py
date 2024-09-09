@@ -20,7 +20,7 @@ SECRET_KEY = 'django-insecure-q8+tc3rx@)6kkji&v&rqu6tblkk=kc-^ei%1!^r+k)%=1%c$nz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
@@ -37,6 +37,12 @@ INSTALLED_APPS = [
     'recommend',
     'channels',
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer"
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -67,9 +73,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'assistant_be.wsgi.application'
+# WSGI_APPLICATION = 'assistant_be.wsgi.application'
 ASGI_APPLICATION = 'assistant_be.asgi.application'
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -174,3 +179,6 @@ BACKEND_URL = os.getenv('BACKEND_URL', 'http://127.0.0.1/')
 HEFENG_HOST = os.getenv('HEFENG_HOST', 'devapi.qweather.com')
 HEFENG_KEY = os.getenv('HEFENG_KEY', '')
 MODEL_NAME = os.getenv('MODEL_NAME', 'Qwen1.5-0.5B-Chat')
+TMDB_KEY = os.getenv('TMDB_KEY')
+
+MODEL_OUT_TIMEOUT=1200

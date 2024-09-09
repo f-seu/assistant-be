@@ -7,7 +7,7 @@ from django.contrib import admin
 from .models import CalendarModel,PlanModel
 
 @admin.register(CalendarModel)
-class CalenderModelAdmin(admin.ModelAdmin):
+class CalendarModelAdmin(admin.ModelAdmin):
     list_display = ('year', 'month', 'day', 'content')
     list_filter = ('year', 'month', 'day')
     search_fields = ('content',)
