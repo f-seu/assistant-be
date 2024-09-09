@@ -4,43 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat(chat):改为使用chatchat3">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/routing.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/routing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/consumers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/views.py" afterDir="false" />
+    <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat:添加版权文件">
+      <change afterPath="$PROJECT_DIR$/start.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +143,7 @@
       <workItem from="1722169022445" duration="2000" />
       <workItem from="1722169038495" duration="128000" />
       <workItem from="1722519280020" duration="9000" />
-      <workItem from="1725894955315" duration="248000" />
+      <workItem from="1725894955315" duration="609000" />
     </task>
     <task id="LOCAL-00001" summary="feat(chat):实现聊天基本功能">
       <option name="closed" value="true" />
@@ -196,7 +161,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721480768528</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="feat:添加版权文件">
+      <option name="closed" value="true" />
+      <created>1725895232718</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1725895232718</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -205,7 +178,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(chat):实现聊天基本功能" />
     <MESSAGE value="feat(chat):改为使用chatchat3" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(chat):改为使用chatchat3" />
+    <MESSAGE value="feat:添加版权文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat:添加版权文件" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/assistant_be$request.coverage" NAME="chat_service 覆盖结果" MODIFIED="1718895910052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat" />
