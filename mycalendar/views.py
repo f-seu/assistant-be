@@ -1,4 +1,8 @@
-from django.shortcuts import render
+"""
+ * Copyright (c) 2024, Li Yaning,Zu Yuankun/Southeast University
+ * Licensed under the GPL3 License (see LICENSE file for details)
+"""
+
 
 # Create your views here.
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication

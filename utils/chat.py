@@ -1,9 +1,10 @@
+"""
+ * Copyright (c) 2024, Li Yaning,Zu Yuankun/Southeast University
+ * Licensed under the GPL3 License (see LICENSE file for details)
+"""
+
 from assistant_be.settings import BACKEND_URL, MODEL_NAME
-import requests
-import json
 import logging
-import re
-import os
 from openai import OpenAI
 
 
