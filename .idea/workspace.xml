@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat:增加版权说明">
-      <change afterPath="$PROJECT_DIR$/chatchat/basic_settings.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatchat/kb_settings.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatchat/model_settings.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatchat/prompt_settings.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chatchat/tool_settings.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assistant_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/consumers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -343,7 +337,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/recommend/consumers.py</url>
-          <line>156</line>
+          <line>155</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

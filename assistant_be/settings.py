@@ -141,7 +141,7 @@ LOGGING = {
             'style': '{',
         },
         'simple': {
-            'format': '{levelname} {message}',
+            'format': '{filename}:{lineno}-{levelname}-{asctime}-{module}-{message}',
             'style': '{',
         },
     },
