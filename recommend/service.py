@@ -14,7 +14,7 @@ class RecommendService(object):
         self.logger = logging.getLogger('myapp')
 
     def get_music(self, num):
-        prompt = (f'请根据知识库，推荐{num}个我可能喜欢的音乐，给出我一个json格式的list，每个元素里面包含一个title和一个reason，title是音乐的名字，reason'
+        prompt = (f'请根据知识库，推荐{num}个我可能喜欢的音乐，给出我一个json格式的list，确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。每个元素里面包含一个title和一个reason，title是音乐的名字，reason'
                   f'是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容。例如你应该输出:[{{"title":"标题","reason":"原因"}}]')
 
         self.logger.info(f"正在尝试推荐音乐，prompt为：{prompt}")
@@ -46,10 +46,10 @@ class RecommendService(object):
             raise AssertionError("模型输出解析失败")
 
     def get_movie(self, num):
-        prompt = (f'请根据知识库，推荐{num}个我可能喜欢的电影，给出我一个json格式的list，每个元素里面包含一个title和一个reason，title是电影的名字，reason'
+        prompt = (f'请根据知识库，推荐{num}个我可能喜欢的电影，给出我一个json格式的list，确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。每个元素里面包含一个title和一个reason，title是电影的名字，reason'
                   f'是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容。例如你应该输出:[{{"title":"标题","reason":"原因"}}]')
 
-        self.logger.info(f"正在尝试推荐音乐，prompt为：{prompt}")
+        self.logger.info(f"正在尝试推荐电影，prompt为：{prompt}")
         results = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
 
         # 修正正则表达式以匹配正确的内容
