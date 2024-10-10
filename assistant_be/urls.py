@@ -24,6 +24,7 @@ from django.urls import path, include
 from chat.views import ChatView,MessageView,ChatNumView,ChatListView
 from mycalendar.views import CalendarView,PlanView,HasCalendarView
 from recommend.views import RecommendView
+from user.views import get_file_list,delete_file,post_file
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/chat/', ChatView.as_view()),
@@ -37,4 +38,7 @@ urlpatterns = [
     path('api/plan/', PlanView.as_view()),
     path('api/recommend',RecommendView.as_view()),
     path('api-auth/', include('rest_framework.urls')),
+    path('api/knowledge_base/list_files',get_file_list),
+    path('api/knowledge_base/delete_docs',delete_file),
+    path('api/knowledge_base/upload_docs',post_file),
 ]

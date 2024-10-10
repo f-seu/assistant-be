@@ -13,6 +13,18 @@ class RecommendService(object):
         self.chat = ChatService()
         self.logger = logging.getLogger('myapp')
 
+    def handle_result_str_to_json(self, s):
+        start = s.rfind('[')
+        if start == -1:
+            raise AssertionError("无法在字符串中找到[")
+
+        end = s.find(']', start)
+        if end == -1:
+            raise AssertionError("无法在字符串中找到]")
+        s = s[start:end + 1]
+        results = json.loads(s)
+        return results
+
     def get_music(self, num):
         prompt = (f'请根据知识库，推荐{num}个我可能喜欢的音乐，给出我一个json格式的list，确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。每个元素里面包含一个title和一个reason，title是音乐的名字，reason'
                   f'是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容。例如你应该输出:[{{"title":"标题","reason":"原因"}}]')
@@ -20,14 +32,14 @@ class RecommendService(object):
         self.logger.info(f"正在尝试推荐音乐，prompt为：{prompt}")
         results = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
 
-        result = results.split("```")[-1]
-        if len(result) < 10:
-            result = results[-2]
-        try:
-            result = result.replace("json","")
-            result = result.lstrip("\n")
 
-            results = json.loads(result)
+        try:
+            results = self.handle_result_str_to_json(results)
+        except Exception as err:
+            import traceback
+            traceback.print_exc()
+            raise AssertionError(f"获取音乐模型输出解析失败:{err}")
+        try:
             idx = 0
             for result in results:
                 title = result['title']
@@ -43,7 +55,7 @@ class RecommendService(object):
         except Exception as err:
             import traceback
             traceback.print_exc()
-            raise AssertionError("模型输出解析失败")
+            raise AssertionError("联网获取音乐失败")
 
     def get_movie(self, num):
         prompt = (f'请根据知识库，推荐{num}个我可能喜欢的电影，给出我一个json格式的list，确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。每个元素里面包含一个title和一个reason，title是电影的名字，reason'
@@ -53,13 +65,11 @@ class RecommendService(object):
         results = self.chat.chat_with_search_engine_and_knowledgebase([], prompt)
 
         # 修正正则表达式以匹配正确的内容
-        result = results.split("```")[-1]
-        if len(result) < 10:
-            result = results[-2]
         try:
-            result = result.replace("json","")
-            result = result.lstrip("\n")
-            results = json.loads(result)
+            results = self.handle_result_str_to_json(results)
+        except Exception as err:
+            raise AssertionError(f"获取电影推荐模型输出解析失败:{err}")
+        try:
             idx = 0
             for result in results:
                 title = result['title']
@@ -72,9 +82,9 @@ class RecommendService(object):
             modified_results = json.dumps(results, ensure_ascii=False, indent=2)
             return modified_results
         except Exception as err:
-            import traceback
-            traceback.print_exc()
-            raise AssertionError("模型输出解析失败")
+            raise AssertionError(f"联网获取电影信息失败:{err}")
+
+
 
     def get_movie_poster_and_title(self,name):
         url = f'https://api.themoviedb.org/3/search/movie?query={name}&api_key={TMDB_KEY}'

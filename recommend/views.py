@@ -51,6 +51,8 @@ class RecommendView(APIView):
                 thread.start()
             response['data'] = RecommendModelSerializer(latest_recommendation).data
         else:
+            thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
+            thread.start()
             response['code'] = 4004
             response['msg'] = "暂无推荐，请您稍后重试"
 

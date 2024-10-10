@@ -68,13 +68,13 @@ class Consumer(WebsocketConsumer):
 
     def send_app_launch_notifications(self):
 
-        latest_recommendation = RecommendModel.objects.filter(recommend_type="app").order_by('-create_at').first()
-        if not latest_recommendation:
-            recommend_app_message = self.get_recommend_message()
-            latest_recommendation = RecommendModel.objects.create(recommend_type="app",content=recommend_app_message)
-
-        serialized_data = RecommendModelSerializer(latest_recommendation).data
-        self.send(text_data=json.dumps(serialized_data))
+        # latest_recommendation = RecommendModel.objects.filter(recommend_type="app").order_by('-create_at').first()
+        # if not latest_recommendation:
+        #     recommend_app_message = self.get_recommend_message()
+        #     latest_recommendation = RecommendModel.objects.create(recommend_type="app",content=recommend_app_message)
+        #
+        # serialized_data = RecommendModelSerializer(latest_recommendation).data
+        # self.send(text_data=json.dumps(serialized_data))
 
 
         self.logger.info("monitor subprocess opened")
