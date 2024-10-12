@@ -6,7 +6,7 @@ import logging
 import requests
 import re
 import json
-from assistant_be.settings import TMDB_KEY
+from assistant_be.settings import TMDB_KEY,MUSIC_URL
 
 class RecommendService(object):
     def __init__(self):
@@ -34,6 +34,7 @@ class RecommendService(object):
 
 
         try:
+            print(results)
             results = self.handle_result_str_to_json(results)
         except Exception as err:
             import traceback
@@ -44,6 +45,9 @@ class RecommendService(object):
             for result in results:
                 title = result['title']
                 title,poster,url = self.get_music_poster_and_title(title)
+                if title == "":
+                    idx += 1
+                    continue
                 # result['title'] = title
                 result['poster'] = poster
                 result['url'] = url
@@ -99,11 +103,15 @@ class RecommendService(object):
         return name,poster,url
 
     def get_music_poster_and_title(self,name):
-        url = f"https://dataiqs.com/api/kgmusic/?msg={name}&type=mv&n=0"
+        url = f"http://wanghun.top/api/v5/music/qq.php?msg={name}&n=1"
         res = requests.get(url,timeout=10,proxies=[])
         res = res.json()
-        res = res['data']
+        print(res)
+        # res = res
+        code = res['code']
+        if code != "200":
+            return "","",""
         name = res['name']
-        poster = res['cover_url']
-        url = res['mv_url']
+        poster = res['picture']
+        url = res['qqhtml']
         return name, poster, url

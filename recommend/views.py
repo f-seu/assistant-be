@@ -77,5 +77,7 @@ class RecommendView(APIView):
                 recommend_obj.save()
                 break
             except Exception as err:
+                import traceback
+                traceback.print_exc()
                 self.logger.error(f"获取推荐失败: {err}，正在重试{t}")
         cache.delete(recommend_type)

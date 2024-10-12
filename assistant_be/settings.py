@@ -180,5 +180,5 @@ HEFENG_HOST = os.getenv('HEFENG_HOST', 'devapi.qweather.com')
 HEFENG_KEY = os.getenv('HEFENG_KEY', '')
 MODEL_NAME = os.getenv('MODEL_NAME', 'Qwen1.5-0.5B-Chat')
 TMDB_KEY = os.getenv('TMDB_KEY')
-
+MUSIC_URL = os.getenv('MUSIC_URL')
 MODEL_OUT_TIMEOUT=1200

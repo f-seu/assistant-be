@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat:修改推荐音乐电影的prom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assistant_be/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommend/consumers.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/consumers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assistant_be/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/assistant_be/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recommend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/recommend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/views.py" afterDir="false" />
     </list>
@@ -116,7 +115,7 @@
       <recent name="F:\django\assistant-be\calendar" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Django 服务器.assistant_be">
     <configuration name="chat" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="assistant_be" />
       <option name="ENV_FILES" value="" />
@@ -266,7 +265,9 @@
       <workItem from="1721842920782" duration="135000" />
       <workItem from="1721843218055" duration="28623000" />
       <workItem from="1722871448715" duration="4354000" />
-      <workItem from="1728533625139" duration="10027000" />
+      <workItem from="1728533625139" duration="10332000" />
+      <workItem from="1728647594557" duration="5012000" />
+      <workItem from="1728743334596" duration="438000" />
     </task>
     <task id="LOCAL-00001" summary="feat(chat):实现聊天基本功能">
       <option name="closed" value="true" />
@@ -336,7 +337,7 @@
     <SUITE FILE_PATH="coverage/assistant_be$views.coverage" NAME="views Coverage Results" MODIFIED="1722445104033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat" />
     <SUITE FILE_PATH="coverage/assistant_be$request.coverage" NAME="chat_service 覆盖结果" MODIFIED="1718895910052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/chat" />
     <SUITE FILE_PATH="coverage/assistant_be$chat.coverage" NAME="chat 覆盖结果" MODIFIED="1721843495161" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/utils" />
-    <SUITE FILE_PATH="coverage/assistant_be$test.coverage" NAME="test 覆盖结果" MODIFIED="1728535229036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/assistant_be$test.coverage" NAME="test 覆盖结果" MODIFIED="1728662494319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/assistant_be$settings.coverage" NAME="settings Coverage Results" MODIFIED="1722367293326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/assistant_be" />
   </component>
 </project>
