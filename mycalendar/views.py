@@ -133,11 +133,14 @@ class PlanView(APIView):
     def get_plan(self, year, month, day, content):
         cache.set(f"{year}-{month}-{day}","true", timeout=300)
         try:
-            plan_str = self.calendar_service.get_plan(year=year, month=month, day=day, content=content)
-            pattern = r'"action": "Final Answer",\s*"action_input":\s*"([^"]+)"'
-            matches = re.findall(pattern, plan_str)
-            plan_str = matches[0]
-            plan = PlanModel.objects.get(year=year, month=month, day=day)
+            result = self.calendar_service.get_plan(year=year, month=month, day=day, content=content)
+            try:
+                pattern = r'"action": "Final Answer",\s*"action_input":\s*"([^"]+)"'
+                matches = re.findall(pattern, result)
+                plan_str = matches[0]
+            except Exception as e:
+                plan_str = result.split('}')[-1]
+            plan = PlanModel.objects.get(year=year, month=month, day=day) 
             plan.content = plan_str
             plan.save()
         except Exception as err:
