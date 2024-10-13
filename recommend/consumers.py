@@ -17,7 +17,7 @@ desktop_to_name = {
     "qq.desktop": "qq",
     "code.desktop": "vscode",
     "bytedance-feishu.desktop": "飞书",
-    "wechat.desktop":"微信",
+    "wechat-beta.desktop":"微信",
     "ukui-notebook.desktop":"便利贴",
     "google-chrome.desktop":"谷歌浏览器"
 }
@@ -26,7 +26,7 @@ name_to_path = {
     "vscode": "/usr/share/applications/code.desktop",
     "飞书": "/usr/share/applications/bytedance-feishu.desktop",
     "便利贴":"/usr/share/applications/ukui-notebook.desktop",
-    "微信":"/usr/share/applications/wechat.desktop",
+    "微信":"/usr/share/applications/wechat-beta.desktop",
     "谷歌浏览器":"/usr/share/applications/google-chrome.desktop"
 }
 apps_desc = {
@@ -34,10 +34,17 @@ apps_desc = {
     "飞书": "一个集成即时通讯、文档协作、日历管理和视频会议等功能的工作办公软件，由字节跳动开发，旨在提升团队协作效率和信息共享。",
     "vscode": "一个由微软开发的轻量级且功能强大的代码编写软件，支持多种编程语言和扩展插件，广泛应用于软件开发和调试。",
     "微信": "一个由腾讯开发的多功能社交软件，提供即时通讯、朋友圈、公众号、支付等多种功能，是中国最受欢迎的社交平台之一。",
-    "谷歌": "全球最大的搜索引擎公司，提供包括搜索引擎、电子邮件、地图、浏览器和操作系统等多种互联网服务和产品，致力于组织全球信息并使其可供用户访问和使用。",
+    "谷歌浏览器": "全球最大的搜索引擎公司，提供包括搜索引擎、电子邮件、地图、浏览器和操作系统等多种互联网服务和产品，致力于组织全球信息并使其可供用户访问和使用。",
     "便利贴": "一种用于快速记录和管理笔记的小工具，通常以虚拟或实体纸片形式出现，帮助用户方便地记录待办事项、提醒和重要信息。"
 }
-
+apps = [
+    "qq",
+    "飞书",
+    "vscode",
+    "微信",
+    "谷歌浏览器",
+    "便利贴",
+]
 
 
 class Consumer(WebsocketConsumer):
@@ -51,6 +58,7 @@ class Consumer(WebsocketConsumer):
 
     def connect(self):
         self.accept()
+        print("accept")
         self.start_process_monitor()
 
 
@@ -63,23 +71,24 @@ class Consumer(WebsocketConsumer):
 
     def start_process_monitor(self):
         # 启动新线程来监控进程
+        print("start")
         self.monitor_thread = threading.Thread(target=self.send_app_launch_notifications)
         self.monitor_thread.start()
 
     def send_app_launch_notifications(self):
 
-        # latest_recommendation = RecommendModel.objects.filter(recommend_type="app").order_by('-create_at').first()
-        # if not latest_recommendation:
-        #     recommend_app_message = self.get_recommend_message()
-        #     latest_recommendation = RecommendModel.objects.create(recommend_type="app",content=recommend_app_message)
-        #
-        # serialized_data = RecommendModelSerializer(latest_recommendation).data
-        # self.send(text_data=json.dumps(serialized_data))
+        latest_recommendation = RecommendModel.objects.filter(recommend_type="app").order_by('-create_at').first()
+        if not latest_recommendation:
+            recommend_app_message = self.get_recommend_message()
+            latest_recommendation = RecommendModel.objects.create(recommend_type="app",content=recommend_app_message)
+        
+        serialized_data = RecommendModelSerializer(latest_recommendation).data
+        self.send(text_data=json.dumps(serialized_data))
 
 
         self.logger.info("monitor subprocess opened")
         self.process = subprocess.Popen(
-            ["dbus-monitor", "interface='com.kylin.AppManager', member='LaunchApp'"],
+            ["dbus-monitor", "member='LaunchApp'"],
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True
@@ -89,13 +98,17 @@ class Consumer(WebsocketConsumer):
             line = self.process.stdout.readline()
             if line:
                 line = line.strip()  # Assuming output is encoded in utf-8
+                print(line)
                 if "string" in line:
                     app_path = line.strip().split(' ')[1]
+                    print("*******",app_path)
                     if self.handle_new_app_open(app_path):
                         recommend_app_message = self.get_recommend_message()
                         latest_recommendation = RecommendModel.objects.create(recommend_type="app",content=recommend_app_message)
                         serialized_data = RecommendModelSerializer(latest_recommendation).data
                         self.send(text_data=json.dumps(serialized_data))
+        
+        print("exit")
 
     def receive(self, text_data=None, bytes_data=None):
         self.send(text_data=text_data)
@@ -105,7 +118,8 @@ class Consumer(WebsocketConsumer):
         formatted_date = local_time.strftime("%Y年%m月%d日%H时%M分%S秒")
         prompt = (
             f'现在时间是{formatted_date}，请根据以下信息，结合app打开的时间，以及打开app的顺序，推荐2个我现在最可能打开的应用，给出我一个json格式的list，每个元素里面包含一个name和一个reason，name是app的名字，'
-            f'reason是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容，在可能的情况下请尽量强调与刚刚打开的APP的联系。例如你应该输出类似于如下内容:[{{"name":"应用名称","reason":"打开原因"}}。确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。')
+            f'reason是推荐的原因，推荐原因用一句话说明即可，不要有额外的内容，在可能的情况下请尽量强调与刚刚打开的APP的联系。例如你应该输出类似于如下内容:[{{"name":"应用名称","reason":"打开原因"}}。确保输出是紧凑格式的有效 JSON 对象，不包含任何其他解释、转义符、换行符或反斜杠。'
+            f'你只能推荐如下列表中的应用：{apps}')
 
 
         prompt = prompt + self.get_app_log_and_desc()

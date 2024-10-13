@@ -44,7 +44,6 @@ class RecommendView(APIView):
         latest_recommendation = RecommendModel.objects.filter(recommend_type=recommend_type).order_by('-create_at').first()
         if latest_recommendation:
             current_time = now()
-
             time_diff = (current_time - latest_recommendation.create_at).total_seconds()
             if time_diff > 60:
                 thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
@@ -53,7 +52,7 @@ class RecommendView(APIView):
         else:
             thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
             thread.start()
-            response['code'] = 4004
+            response['code'] = 4004  
             response['msg'] = "暂无推荐，请您稍后重试"
 
         return Response(response)

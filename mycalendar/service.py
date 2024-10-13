@@ -42,7 +42,7 @@ class CalendarService(object):
             else:
                 weather_prompt += "。"
 
-        prompt = f"我{year}年{month}月{day}的行程为{content}{'' if content[-1]=='。' else '。'}{weather_prompt}帮我看一下车票之类的, 结合以上内容，详细的为我规划这天的行程安排推荐，给出具体的通行方式。"
+        prompt = f"我{year}年{month}月{day}的行程为{content}{'' if content[-1]=='。' else '。'}{weather_prompt}, 结合以上内容，给出具体通行方式（有需要的话给出航班/车次信息）并给出具体这些天的日程安排，尽量详细一点。"
 
         self.logger.info(f"正在尝试规划行程，prompt为：{prompt}")
         result = self.chat.chat_with_search_engine([], prompt)

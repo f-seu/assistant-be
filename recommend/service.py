@@ -13,7 +13,7 @@ class RecommendService(object):
         self.chat = ChatService()
         self.logger = logging.getLogger('myapp')
 
-    def handle_result_str_to_json(self, s):
+    def lllllhandle_result_str_to_json(self, s):
         start = s.rfind('[')
         if start == -1:
             raise AssertionError("无法在字符串中找到[")
