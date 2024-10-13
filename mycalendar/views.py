@@ -61,6 +61,7 @@ class CalendarView(APIView):
             calendar = CalendarModel.objects.create(year=year, month=month, day=day)
             calendar.save()
         calendar.content = content
+        calendar.user_update = True
         calendar.save()
         response['code'] = 0
         return Response(response)
@@ -77,7 +78,7 @@ class HasCalendarView(APIView):
             response['msg'] = "参数错误"
             response['code'] = 4001
             return Response(response, status=status.HTTP_200_OK)
-        calendar = CalendarModel.objects.filter(year=year, month=month).exclude(content="").all()
+        calendar = CalendarModel.objects.filter(year=year, month=month,user_update=True).all()
 
         serializer = CalendarListSerializer(calendar,many=True)
 
@@ -91,6 +92,37 @@ class PlanView(APIView):
     logger = logging.getLogger('myapp')
     authentication_classes = (CsrfExemptSessionAuthentication, BasicAuthentication)
     calendar_service = CalendarService()
+    def put(self, request):
+        response = dict()
+        response['code'] = 0
+
+
+        year = request.data.get('year')
+        month = request.data.get('month')
+        day = request.data.get('day')
+
+        if not year or not month or not day:
+            response['msg'] = "参数错误"
+            response['code'] = 4001
+            return Response(response)
+
+        if cache.get(f"{year}-{month}-{day}"):
+            response['code'] = 0
+            response['msg'] = "日程正在规划中，请您稍后尝试"
+            return Response(response)
+
+        calendar = CalendarModel.objects.filter(year=year, month=month, day=day).first()
+        if calendar is None or len(calendar.content) < 10:
+            self.logger.warning(f"规划{year}-{month}-{day}日程失败，calendar对象：{calendar}")
+            response['msg'] = "当前选择日期不存在日程或日程过短，无法进行规划"
+            response['code'] = 4002
+            return Response(response)
+
+        thread = threading.Thread(target=self.get_plan, args=(year, month, day, calendar.content), daemon=True)
+        thread.start()
+        response['code'] = 0
+        response['msg'] = "已开始规划日程"
+        return Response(response)
 
     def get(self, request):
         # 获取一个chat的所有消息列表
@@ -104,31 +136,15 @@ class PlanView(APIView):
         year = data.get('year')
         month = data.get('month')
         day = data.get('day')
-        force_update = data.get('force_update')
 
         if cache.get(f"{year}-{month}-{day}"):
             response['code'] = 2002
             response['msg'] = "日程正在规划中，请您稍后尝试"
             return Response(response)
 
-        plan, _ = PlanModel.objects.get_or_create(year=year, month=month, day=day)
-        if force_update or plan.content == "":
-            calendar = CalendarModel.objects.filter(year=year,month=month,day=day).first()
-            if calendar is None or len(calendar.content) < 10:
-                self.logger.warning(f"规划{year}-{month}-{day}日程失败，calendar对象：{calendar}")
-                response['msg'] = "当前选择日期不存在日程或日程过短，无法进行规划"
-                response['code'] = 4002
-                return Response(response)
-
-            thread = threading.Thread(target=self.get_plan, args=(year, month, day, calendar.content),daemon=True)
-            thread.start()
-            response['code'] = 2002
-            response['msg'] = "日程正在规划中，请您稍后尝试"
-            return Response(response)
-
-        else:
-            response['data'] = PlanSerializer(plan).data
-            return Response(response)
+        plan,_ = PlanModel.objects.get_or_create(year=year, month=month, day=day)
+        response['data'] = PlanSerializer(plan).data
+        return Response(response)
 
     def get_plan(self, year, month, day, content):
         cache.set(f"{year}-{month}-{day}","true", timeout=300)
@@ -140,9 +156,14 @@ class PlanView(APIView):
                 plan_str = matches[0]
             except Exception as e:
                 plan_str = result.split('}')[-1]
-            plan = PlanModel.objects.get(year=year, month=month, day=day) 
+            plan = PlanModel.objects.get(year=year, month=month, day=day)
             plan.content = plan_str
+            plan.has_processed = True
             plan.save()
         except Exception as err:
             self.logger.error(f"获取日程失败:{err}")
+            plan = PlanModel.objects.get(year=year, month=month, day=day)
+            plan.content = f"获取日程失败:{err}"
+            plan.has_processed = True
+            plan.save()
         cache.delete(f"{year}-{month}-{day}")

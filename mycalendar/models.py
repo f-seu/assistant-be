@@ -17,7 +17,8 @@ class CalendarModel(models.Model):
     month = models.PositiveSmallIntegerField(verbose_name="月")
     day = models.PositiveSmallIntegerField(verbose_name="日")
     content = models.TextField(verbose_name="日程")
-
+    update_at = models.DateTimeField(auto_now=True, verbose_name="最后更新日期")
+    user_update = models.BooleanField(verbose_name="由用户更新", default=False)
     def __str__(self):
         return f"{self.year}-{self.month}-{self.day}:{str(self.content)}"
 
@@ -31,7 +32,8 @@ class PlanModel(models.Model):
     month = models.PositiveSmallIntegerField(verbose_name="月")
     day = models.PositiveSmallIntegerField(verbose_name="日")
     content = models.TextField(verbose_name="规划后日程")
-    last_modified = models.DateTimeField(auto_now=True, verbose_name="最后更新日期")
+    has_processed = models.BooleanField(verbose_name="是否已经处理过", default=False)
+    update_at = models.DateTimeField(auto_now=True, verbose_name="最后更新日期")
 
     def __str__(self):
         return f"{self.year}-{self.month}-{self.day}:{str(self.content)}"

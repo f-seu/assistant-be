@@ -62,7 +62,7 @@ class ChatView(APIView):
 
         chat = get_object_or_404(ChatModel, id=chat_id)
 
-        serializer = ChatSerializer(chat, fields=['id', 'name', 'created_at'])
+        serializer = ChatSerializer(chat)
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)
@@ -79,10 +79,11 @@ class ChatView(APIView):
 
         prompt = f"下面是用户输入的一个问题，请不要回答这个问题，而是为这个问题取一个简短的10个字左右的标题:{first_message_content}"
         title = chat_service_obj.chat([], prompt)
+        title = title.replace("\"","").replace("“","").replace("”","")
         chat = ChatModel(name=title)
         chat.save()
 
-        serializer = ChatSerializer(chat, fields=['id', 'name', 'created_at'])
+        serializer = ChatSerializer(chat)
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)
@@ -117,7 +118,7 @@ class ChatListView(APIView):
 
         chats = ChatModel.objects.all().order_by('-created_at')[start:end]
 
-        serializer = ChatSerializer(chats, many=True, fields=['id', 'name', 'created_at'])
+        serializer = ChatSerializer(chats, many=True)
         response['data'] = serializer.data
         response['code'] = 0
         return Response(response)

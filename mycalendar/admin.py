@@ -15,7 +15,7 @@ class CalendarModelAdmin(admin.ModelAdmin):
 
 @admin.register(PlanModel)
 class PlanModelAdmin(admin.ModelAdmin):
-    list_display = ('year', 'month', 'day', 'content', 'last_modified')
+    list_display = ('year', 'month', 'day', 'content', 'update_at')
     list_filter = ('year', 'month', 'day')
     search_fields = ('content',)
 
