@@ -6,12 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="05af020c-a96e-401d-8350-6f5e44bf93bc" name="更改" comment="feat:修改推荐音乐电影的prom">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mycalendar/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mycalendar/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recommend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/recommend/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,29 +50,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Django 服务器.assistant_be.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chat.executor&quot;: &quot;Run&quot;,
-    &quot;Python.chat_service.executor&quot;: &quot;Run&quot;,
-    &quot;Python.request.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.views.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenDjangoStructureViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.pycharm.django.structure.promotion.once.per.project&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/django/assistant-be/calendar&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Django 服务器.assistant_be.executor": "Run",
+    "Python.chat.executor": "Run",
+    "Python.chat_service.executor": "Run",
+    "Python.request.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.views.executor": "Run",
+    "RunOnceActivity.OpenDjangoStructureViewOnStart": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.pycharm.django.structure.promotion.once.per.project": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "F:/django/assistant-be/calendar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
     <layout>
       <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
@@ -271,6 +268,7 @@
       <workItem from="1728533625139" duration="10332000" />
       <workItem from="1728647594557" duration="5012000" />
       <workItem from="1728743334596" duration="438000" />
+      <workItem from="1728912203381" duration="2364000" />
     </task>
     <task id="LOCAL-00001" summary="feat(chat):实现聊天基本功能">
       <option name="closed" value="true" />

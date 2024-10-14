@@ -45,7 +45,7 @@ class RecommendView(APIView):
         if latest_recommendation:
             current_time = now()
             time_diff = (current_time - latest_recommendation.create_at).total_seconds()
-            if time_diff > 60:
+            if time_diff > 10:
                 thread = threading.Thread(target=self.get_recommend, args=(recommend_type,), daemon=True)
                 thread.start()
             response['data'] = RecommendModelSerializer(latest_recommendation).data
